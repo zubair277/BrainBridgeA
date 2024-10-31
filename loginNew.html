@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background:url(images/hpage.jpg);
+            background-attachment: fixed;
+ background-position: center;
+ background-size: cover;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            width: 1000px;
+            height: 600px;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .image-container {
+            margin-left: 10px;
+        }
+
+        .image-container img {
+            width: 390px;
+            height: 560px;
+            border-radius: 1px;
+        }
+
+        .login-container h2 {
+            font-size: 30px;
+            text-align: center;
+            color: #333;
+            margin-right: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            width: 500px;
+            padding: 20px;
+            height: 50px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        label {
+            display: block;
+            color: #555;
+            font-size: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            margin-right: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .remember-me {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .remember-me input {
+            margin-right: 5px;
+        }
+
+        .btn {
+            width: 350px;
+            padding: 15px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-left: 130px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 19px;
+        }
+
+        .register-link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="remember-me">
+                <input type="checkbox" id="rememberMe">
+                <label for="rememberMe">Remember Me</label>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div class="register-link">
+            <p>No account? <a href="register.html">Register now</a></p>
+        </div>
+    </div>
+    <div class="image-container">
+        <img src="images/book.jpeg" alt="Login Image">
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Load saved username and password if "Remember Me" was checked previously
+        if (localStorage.getItem("rememberMe") === "true") {
+            document.getElementById("username").value = localStorage.getItem("username");
+            document.getElementById("password").value = localStorage.getItem("password");
+            document.getElementById("rememberMe").checked = true;
+        }
+    });
+
+    function handleLogin(event) {
+        event.preventDefault(); // Prevent form submission
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const rememberMe = document.getElementById("rememberMe").checked;
+
+        if (rememberMe) {
+            localStorage.setItem("username", username);
+            localStorage.setItem("password", password);
+            localStorage.setItem("rememberMe", "true");
+        } else {
+            localStorage.removeItem("username");
+            localStorage.removeItem("password");
+            localStorage.setItem("rememberMe", "false");
+        }
+
+        alert("Login successful!");
+        window.location.href = "course.html";
+    }
+</script>
+
+</body>
+</html>
